@@ -41,10 +41,10 @@
 
   "//": "obstruct our macro on the decap layer, etc",
   "PDN_OBSTRUCTIONS": [
-    "met4 0 0 30 93"
+    "met4 34 27 127 77"
   ],
   "ROUTING_OBSTRUCTIONS": [
-    "met4 0 0 30 93"
+    "met4 34 27 127 77"
   ],
   "//": "disabled on this for now, its fine in reality",
   "RUN_LVS": false,
@@ -60,8 +60,8 @@
       "instances": {
         "logo": {
           "location": [
-            0,
-            0
+            34,
+            37
           ],
           "orientation": "N"
         }
