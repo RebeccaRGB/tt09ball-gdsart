@@ -5,6 +5,10 @@
 
 `default_nettype none
 
+`ifdef USE_LOGO
+`include "logo.vh"
+`endif
+
 module tt_um_rebeccargb_tt09ball_gdsart (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
@@ -32,5 +36,13 @@ module tt_um_rebeccargb_tt09ball_gdsart (
 
   // List all unused inputs to prevent warnings
   wire _unused_ok = &{ui_in[7:4], uio_in, ena};
+
+// Add logo design
+`ifndef GL_TEST
+`ifdef USE_LOGO
+  (* keep *)
+  `LOGO_NAME `LOGO_INSTANCE();
+`endif
+`endif
 
 endmodule
