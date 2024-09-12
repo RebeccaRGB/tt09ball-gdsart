@@ -1,20 +1,23 @@
-<!---
-
-This file is used to generate your project datasheet. Please fill in the information below and delete any unused
-sections.
-
-You can also include images in this folder and reference them in the markdown. Each image must be less than
-512 kb in size, and the combined size of all images must be less than 1 MB.
--->
-
 ## How it works
 
-Explain how your project works
+An octal counter is connected to THE STRONGEST 8-byte ROM, which is connected
+to the dedicated output, which is connected to the seven-segment display, to
+provide a carrier for THE STRONGEST GDS art.
+
+You can bypass the counter by setting `ui_in[3]` high and putting the address
+on `ui_in[2:0]`.
 
 ## How to test
 
-Explain how to use your project
+1. Set `ui_in[3]` low.
+2. Set reset low and pulse clk.
+3. Set reset high and pulse clk to change the LED display.
+4. You should see, in order: `9` blank `C` `I` `Г` `П` `O` blank.
+5. Set `ui_in[3]` high.
+6. Set `ui_in[2:0]` to the values 0 through 7.
+7. You should see, in order: `9` blank `C` `I` `Г` `П` `O` blank.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+Seven-segment LED display and/or chip decapping tools, depending on how
+destructive you want to be.
