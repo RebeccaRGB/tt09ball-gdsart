@@ -1,11 +1,11 @@
 # Tiny Tapeout project information
 project:
-  title:        "TT09Ball GDS Art"            # Project title
-  author:       "Rebecca G. Bettencourt"      # Your name
-  discord:      "YoukaiRempeka"               # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "THE STRONGEST"               # One line description of what your project does
-  language:     "Verilog"                     # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0                             # Clock frequency in Hz (or 0 if not applicable)
+  title:        "TT09Ball GDS Art"               # Project title
+  author:       "Rebecca G. Bettencourt"         # Your name
+  discord:      "YoukaiRempeka"                  # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "THE STRONGEST ROM and GDS art"  # One line description of what your project does
+  language:     "Verilog"                        # other examples include SystemVerilog, Amaranth, VHDL, etc
+  clock_hz:     0                                # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
@@ -18,14 +18,15 @@ project:
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
     - "project.v"
+    - "the_ROMest.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
+  ui[0]: "A0"
+  ui[1]: "A1"
+  ui[2]: "A2"
+  ui[3]: "address mode"
   ui[4]: ""
   ui[5]: ""
   ui[6]: ""

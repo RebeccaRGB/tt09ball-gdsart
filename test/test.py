@@ -25,17 +25,83 @@ async def test_project(dut):
 
     dut._log.info("Test project behavior")
 
-    # Set the input values you want to test
-    dut.ui_in.value = 20
-    dut.uio_in.value = 30
-
-    # Wait for one clock cycle to see the output values
     await ClockCycles(dut.clk, 1)
-
-    # The following assersion is just an example of how to check the output values.
-    # Change it to match the actual expected output of your module:
     assert dut.uo_out.value == 0x6F
-    assert dut.uio_out.value == 0x39
+    assert dut.uio_out.value == 0x42
 
-    # Keep testing the module by changing the input values, waiting for
-    # one or more clock cycles, and asserting the expected output values.
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x00
+    assert dut.uio_out.value == 0x41
+
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x39
+    assert dut.uio_out.value == 0x4B
+
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x30
+    assert dut.uio_out.value == 0x41
+
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x31
+    assert dut.uio_out.value == 0x42
+
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x37
+    assert dut.uio_out.value == 0x41
+
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x3F
+    assert dut.uio_out.value == 0x4B
+
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x00
+    assert dut.uio_out.value == 0x41
+
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x6F
+    assert dut.uio_out.value == 0x42
+
+    dut.ui_in.value = 8
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x6F
+    assert dut.uio_out.value == 0x42
+
+    dut.ui_in.value = 9
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x00
+    assert dut.uio_out.value == 0x41
+
+    dut.ui_in.value = 10
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x39
+    assert dut.uio_out.value == 0x4B
+
+    dut.ui_in.value = 11
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x30
+    assert dut.uio_out.value == 0x41
+
+    dut.ui_in.value = 12
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x31
+    assert dut.uio_out.value == 0x42
+
+    dut.ui_in.value = 13
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x37
+    assert dut.uio_out.value == 0x41
+
+    dut.ui_in.value = 14
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x3F
+    assert dut.uio_out.value == 0x4B
+
+    dut.ui_in.value = 15
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x00
+    assert dut.uio_out.value == 0x41
+
+    dut.ui_in.value = 8
+    await ClockCycles(dut.clk, 1)
+    assert dut.uo_out.value == 0x6F
+    assert dut.uio_out.value == 0x42

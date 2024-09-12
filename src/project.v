@@ -16,12 +16,21 @@ module tt_um_rebeccargb_tt09ball_gdsart (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+  reg [2:0] counter;
+
+  always @(posedge clk) begin
+    if (~rst_n) begin
+      counter <= 0;
+    end else begin
+      counter <= counter + 1;
+    end
+  end
+
   // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = 8'h6F;
-  assign uio_out = 8'h39;
-  assign uio_oe  = 8'hFF;
+  the_ROMest rom((ui_in[3] ? ui_in[2:0] : counter), uo_out, uio_out);
+  assign uio_oe = 8'hFF;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ui_in, uio_in, ena, clk, rst_n, 1'b0};
+  wire _unused_ok = &{ui_in[7:4], uio_in, ena};
 
 endmodule
