@@ -40,6 +40,8 @@
   "IGNORE_DISCONNECTED_MODULES": ["tt09ball4_logo", "logo"],
 
   "//": "obstruct our macro on the decap layer, etc",
+  "FP_PDN_VSPACING": 3,
+  "FP_PDN_VWIDTH": 3,
   "PDN_OBSTRUCTIONS": [
     "met4 34 0 127 110"
   ],
