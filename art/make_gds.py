@@ -24,12 +24,17 @@ PIXEL_LAYERS = [
     # (71, 20), # met4, drawing
 ]
 PIXEL_SIZE = 0.28 # um
+VERBOSITY = 1
 
 # Process arguments
 args = sys.argv[1:]
 while args:
     arg = args.pop(0)
-    if arg == '-u' and args:
+    if arg == '-q':
+        VERBOSITY = 0
+    elif arg == '-v':
+        VERBOSITY = 2
+    elif arg == '-u' and args:
         PIXEL_SIZE = float(args.pop(0))
     elif arg == '-i' and args:
         PNG_NAME = args.pop(0)
@@ -43,21 +48,55 @@ while args:
 
 # Open the image
 img = Image.open(PNG_NAME)
+if VERBOSITY > 0:
+    print('Input image size: %dpx x %dpx' % (img.width, img.height))
 
 # Convert the image to grayscale
 img = img.convert("L")
 
+bitmap = [[img.getpixel((x, y)) < 128
+           for x in range(img.width)]
+          for y in range(img.height)]
+
+diagonals = 0
+lone_pixels = 0
+drc_errors = 0
+for y in range(1, img.height):
+    for x in range(1, img.width):
+        if (bitmap[y - 1][x - 1] == bitmap[y][x] and
+            bitmap[y - 1][x] == bitmap[y][x - 1] and
+            bitmap[y - 1][x] != bitmap[y][x]):
+            if VERBOSITY > 1:
+                print('[DRC] Diagonally touching pixels at %d,%d' % (x, y))
+            diagonals += 1
+            drc_errors += 1
+for y in range(img.height):
+    for x in range(img.width):
+        if (bitmap[y][x] != (y > 0 and bitmap[y - 1][x]) and
+            bitmap[y][x] != (y + 1 < img.height and bitmap[y + 1][x]) and
+            bitmap[y][x] != (x > 0 and bitmap[y][x - 1]) and
+            bitmap[y][x] != (x + 1 < img.width and bitmap[y][x + 1])):
+            if VERBOSITY > 1:
+                print('[DRC] Lone pixel at %d,%d' % (x, y))
+            lone_pixels += 1
+            drc_errors += 1
+if drc_errors:
+    print('Warning: %d DRC issues encountered (%d diagonals, %d lone pixels)' %
+          (drc_errors, diagonals, lone_pixels))
+
 layout = gdspy.Cell(CELL_NAME)
+size = (img.width * PIXEL_SIZE, img.height * PIXEL_SIZE)
+if VERBOSITY > 0:
+    print('Output GDS size: %gum x %gum' % size)
+
 for layer, datatype in BOUNDARY_LAYERS:
     layout.add(
-        gdspy.Rectangle((0, 0),
-                        (img.width * PIXEL_SIZE, img.height * PIXEL_SIZE),
+        gdspy.Rectangle((0, 0), size,
                         layer=layer, datatype=datatype))
 for layer, datatype in PIXEL_LAYERS:
     for y in range(img.height):
         for x in range(img.width):
-            color = img.getpixel((x, y))
-            if color < 128:
+            if bitmap[y][x]:
                 # Adjust y-coordinate to flip the image vertically
                 flipped_y = img.height - y - 1
                 layout.add(
