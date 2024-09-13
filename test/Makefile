@@ -23,6 +23,8 @@ COMPILE_ARGS    += -DFUNCTIONAL
 COMPILE_ARGS    += -DUSE_POWER_PINS
 COMPILE_ARGS    += -DSIM
 COMPILE_ARGS    += -DUNIT_DELAY=\#1
+COMPILE_ARGS    += -DLOGO_NAME=tt09ball4_logo -DLOGO_INSTANCE=logo -DUSE_LOGO
+COMPILE_ARGS    += -l$(SRC_DIR)/logo.vh
 VERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v
 VERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v
 
