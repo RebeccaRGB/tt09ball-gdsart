@@ -13,8 +13,8 @@ BOUNDARY_LAYERS = [
     (235, 4), # prBndry, boundary
     (62, 24), # cmm1, waffle-drop
     (105, 52), # cmm2, waffle-drop
-    # (107, 24), # cmm3, waffle-drop
-    # (112, 4), # cmm4, waffle-drop
+    (107, 24), # cmm3, waffle-drop
+    (112, 4), # cmm4, waffle-drop
 ]
 PIXEL_LAYERS = [
     (68, 20), # met1, drawing
