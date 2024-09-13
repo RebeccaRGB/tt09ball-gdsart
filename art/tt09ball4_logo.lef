@@ -5206,6 +5206,8 @@ MACRO tt09ball4_logo
         RECT 0.000 0.000 92.400 29.400 ;
       LAYER met4 ;
         RECT 0.000 0.000 92.400 29.400 ;
+      LAYER met5 ;
+        RECT 0.000 0.000 92.400 29.400 ;
   END
 END tt09ball4_logo
 END LIBRARY
