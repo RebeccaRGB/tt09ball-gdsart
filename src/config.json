@@ -41,7 +41,7 @@
 
   "//": "obstruct our macro on the decap layer, etc",
   "PDN_OBSTRUCTIONS": [
-    "met4 34 27 127 77"
+    "met4 34 0 127 110"
   ],
   "ROUTING_OBSTRUCTIONS": [
     "met4 34 27 127 77"
