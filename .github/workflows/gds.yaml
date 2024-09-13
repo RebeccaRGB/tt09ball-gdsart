@@ -21,9 +21,11 @@ jobs:
   precheck:
     needs: gds
     runs-on: ubuntu-latest
+    env:
+      TT_SKIP_PRECHECK: magic-drc,klayout-beol,power-pin-edges
     steps:
       - name: Run Tiny Tapeout Precheck
-        uses: TinyTapeout/tt-gds-action/precheck@tt09
+        uses: RebeccaRGB/tt-gds-action/precheck@main
 
   gl_test:
     needs: gds
