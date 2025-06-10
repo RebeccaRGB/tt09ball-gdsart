@@ -35,7 +35,7 @@ module tt_um_rebeccargb_tt09ball_gdsart (
   assign uio_oe = 8'hFF;
 
   // List all unused inputs to prevent warnings
-  wire _unused_ok = &{ui_in[7:4], uio_in, ena};
+  wire _unused = &{ui_in[7:4], uio_in, ena, 1'b0};
 
 // Add logo design
 `ifndef GL_TEST
